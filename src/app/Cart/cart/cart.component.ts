@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, TemplateRef } from '@angular/core';
+import { Component, inject, OnInit, Renderer2, TemplateRef } from '@angular/core';
 import { NavbarComponent } from "../../navbar/navbar.component";
 import { Product } from '../../Models/product';
 import { CartService } from '../Services/cart.service';
@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ProductService } from '../../Product/Service/product.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CheckOutComponent } from "../../check-out/check-out.component";
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -28,10 +29,11 @@ export class CartComponent implements OnInit {
   totalPrice:number=0;
 
   private cartService = inject(CartService)
+  private toast = inject(ToastrService)
 
   private productService = inject(ProductService)
 
-  constructor(private dialog : MatDialog){}
+  constructor(private dialog : MatDialog,private renderer: Renderer2){}
 
 
   getItems(){
@@ -51,7 +53,16 @@ export class CartComponent implements OnInit {
 }
 
 checkout(templateRef: TemplateRef<any>) {
+  if(this.getTotalPrice()==0){
+    this.toast.warning("You have no Poduct in the cart","",{
+      positionClass:'sucess',
+      timeOut:1500
+    })
+
+  }
+  else{
   this.dialog.open(templateRef)
+}
 }
 
 
@@ -72,10 +83,34 @@ confirmClearCart() {
 }
   
   
+
+isDarkMode = false;
+  
+  
+
+    
+toggleTheme() {
+  this.isDarkMode = !this.isDarkMode;
+  if (this.isDarkMode) {
+    this.renderer.addClass(document.body, 'dark-theme');
+    localStorage.setItem('theme', 'dark');
+  } else {
+    this.renderer.removeClass(document.body, 'dark-theme');
+    localStorage.setItem('theme', 'light');
+  }
+}
+
+
   ngOnInit(): void {
     
 
     this.getStorageItems();
+
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark') {
+      this.isDarkMode = true;
+      this.renderer.addClass(document.body, 'dark-theme');
+    }
     
     
   }

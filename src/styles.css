@@ -12,3 +12,43 @@
     z-index: 9999; 
 }
 
+
+
+
+
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+  }
+  
+  .dark-theme {
+    --bg-color: #121212;
+    --text-color: #ffffff;
+  }
+  
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+  }
+  
+  
+
+
+
+  
+  .dark-theme .product-card {
+    background-color: #d3d3d3 ; 
+    color: #000000 ;           
+  }
+  
+  .dark-theme .product-card .mat-card-title,
+  .dark-theme .product-card .mat-card-subtitle {
+    color: #000000 ;
+  }
+
+
+
+.dark-theme .cart mat-list{
+    background-color: #d3d3d3 ; 
+}

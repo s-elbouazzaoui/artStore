@@ -4,16 +4,16 @@
       <div class="card">
 
         <div class="rightside">
-          <form action="">
+          <form [formGroup]="formvalid" >
             <h1>CheckOut</h1>
             <h2>Payment Information</h2>
             <p>Cardholder Name</p>
-            <input type="text" class="inputbox" name="name" required />
+            <input type="text" class="inputbox" name="name" formControlName="name" />
             <p>Card Number</p>
-            <input type="number" class="inputbox" name="card_number" id="card_number" required />
+            <input type="number" class="inputbox" name="card_number" id="card_number" formControlName="num" />
 
             <p>Card Type</p>
-            <select class="inputbox" name="card_type" id="card_type" required>
+            <select class="inputbox" name="card_type" id="card_type" formControlName="type">
               <option value="">--Select a Card Type--</option>
               <option value="Visa">Visa</option>
               <option value="RuPay">RuPay</option>
@@ -22,13 +22,13 @@
 <div class="expcvv">
 
             <p class="expcvv_text">Expiry</p>
-            <input type="date" class="inputbox" name="exp_date" id="exp_date" required />
+            <input type="date" class="inputbox" name="exp_date" id="exp_date" formControlName="date" />
 
             <p class="expcvv_text2">CVV</p>
-            <input type="password" class="inputbox" name="cvv" id="cvv" required />
+            <input type="password" class="inputbox" name="cvv" id="cvv" formControlName="cvv" />
         </div>
             <p></p>
-            <button type="submit" class="button">CheckOut</button>
+            <button type="submit" class="button" (click)="validate()">CheckOut</button>
           </form>
         </div>
       </div>

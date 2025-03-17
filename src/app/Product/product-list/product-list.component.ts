@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, Renderer2 } from '@angular/core';
 
 import { ProductService } from '../Service/product.service';
 import { Product } from '../../Models/product';
@@ -15,13 +15,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import {MatSelectModule} from '@angular/material/select';
+import { NightmodeComponent } from "../../nightmode/nightmode.component";
 
 
 
 @Component({
   selector: 'app-product-list',
   imports: [CommonModule, MatCardModule, FlexLayoutModule, CommonModule, MatIconModule,
-    MatInputModule,FlexLayoutModule,MatButtonModule,MatToolbar,MatToolbarRow,RouterModule,MatSelectModule],
+    MatInputModule, FlexLayoutModule, MatButtonModule, MatToolbar, MatToolbarRow, RouterModule, MatSelectModule, NightmodeComponent],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
 })
@@ -35,7 +36,8 @@ export class ProductListComponent implements OnInit {
 
   filteredProducts: Product[] = [];
 
-  constructor(private toast:ToastrService) { }
+  constructor(private toast:ToastrService,private renderer: Renderer2) { }
+  
 
   getProducts(){
     this.productSrvc.getProducts().subscribe(data => {
@@ -75,7 +77,32 @@ export class ProductListComponent implements OnInit {
           
     }
 
-      
+
+
+
+
+
+
+
+
+
+
+
+    isDarkMode = false;
+  
+  
+
+    
+    toggleTheme() {
+      this.isDarkMode = !this.isDarkMode;
+      if (this.isDarkMode) {
+        this.renderer.addClass(document.body, 'dark-theme');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        this.renderer.removeClass(document.body, 'dark-theme');
+        localStorage.setItem('theme', 'light');
+      }
+    }
 
   
 
@@ -84,6 +111,12 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
 
     this.getProducts();
+
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark') {
+      this.isDarkMode = true;
+      this.renderer.addClass(document.body, 'dark-theme');
+    }
 
   }
 
