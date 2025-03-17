@@ -1,0 +1,57 @@
+<app-navbar></app-navbar>
+
+
+<div class="cart">
+<h1 >Cart</h1>
+    
+
+    <mat-card>
+        <mat-list>
+            <mat-list-item *ngFor="let items of Items">
+                <span matListItemTitle>{{items.name}}</span>
+                <span matListItemTitle>{{items.price | currency:'USD'}}</span>
+            </mat-list-item>
+            <mat-list-item >
+                <span matListItemTitle class="price">Total To Pay</span>
+                <span matListItemTitle class="price">{{totalPrice | currency:'USD'}}</span>
+            </mat-list-item>
+            <mat-list-item style="text-align: right;">
+                <button mat-flat-button color="" (click)="checkout(payement)">Checkout</button>
+
+            </mat-list-item >
+            <mat-list-item style="text-align: right;">
+                <button mat-raised-button color="accent" (click)="openDialog(confirmDialog)">Clear Cart</button>
+            </mat-list-item>
+            
+    </mat-list>
+    </mat-card>
+
+
+
+    
+</div>
+
+
+
+
+
+<ng-template #confirmDialog>
+    <div style="width: 550px;">
+    <h2 mat-dialog-title>Confirm Clear Cart</h2>
+    <mat-dialog-content>
+      Are you sure you want to clear the cart?
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-button color="warn" (click)="confirmClearCart()" mat-dialog-close>Clear</button>
+    </mat-dialog-actions>
+</div>
+  </ng-template>
+
+
+
+  <ng-template #payement>
+
+        <app-check-out></app-check-out>
+
+  </ng-template>

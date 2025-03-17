@@ -1,0 +1,18 @@
+app-navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.cart {
+    
+    padding: 50px;    
+    max-width: 800px;   
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.price{font-weight: 800;}

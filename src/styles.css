@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+@Import '../node_modules/ngx-toastr/toastr.css';
+
+.sucess{
+    position: fixed ;
+    top: 65px;
+    right: 0%;
+
+    z-index: 9999; 
+}
+

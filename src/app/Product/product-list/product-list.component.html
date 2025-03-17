@@ -1,0 +1,55 @@
+
+<!-- <ul *ngFor="let p of products,index as i">
+    <li>{{p.id}}</li>
+    <li>{{p.name}}</li>
+    <li>{{p.price}}</li>
+    <li>{{p.image_url}}</li>
+</ul> -->
+
+<mat-toolbar color="primary" class="app-navbar">
+    <mat-toolbar-row fxFlex="row" fxLayoutAlign="space-between center">
+           <span>Product Management</span>
+           <span fxFlex></span>
+           <div style="margin-top: 20px; ">
+                <mat-form-field >
+                    <input  matInput placeholder="Search for a product" (keyup)="applyFilter($event)">
+                </mat-form-field>
+            </div>
+
+        
+           <button mat-button [routerLink]="['']" style="margin: 10px;">Products</button>
+           <button mat-button [routerLink]="['/cart']">Cart</button>
+       </mat-toolbar-row>
+   </mat-toolbar>
+   
+<p>
+    welcome to your Amazing Art Strore:<br>
+    Here you can add painting to your cart in order to checkout<br>
+</p>
+<div class="random"> Our latest collection</div>
+<div  class="random">Sort : 
+    <mat-form-field>
+        <mat-select (selectionChange)="sortProduct($event.value)">
+            <mat-option value="priceLowHigh"> Price : Low to High</mat-option>
+            <mat-option value="priceHighLow"> Price : High To Low</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+
+
+<div fxLayout="row wrap"  fxLayoutGap="20px" >
+
+    <mat-card *ngFor="let p of filteredProducts" class="product-card">
+        <img mat-card-image src="/{{p.image_url}}">
+        <mat-card-content class="card-content">
+            <div class="text-content">        
+                <mat-card-title>{{p.name}}</mat-card-title>
+                <mat-card-subtitle>{{p.price | currency :'USD'}}</mat-card-subtitle>
+            </div>
+            <button class="add" (click)="addToCart(p)"><i class="bi bi-plus"></i></button>
+        </mat-card-content>
+    </mat-card>
+    
+
+</div>
+
