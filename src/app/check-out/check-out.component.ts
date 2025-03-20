@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { ProductService } from '../Product/Service/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-check-out',
@@ -14,6 +16,8 @@ export class CheckOutComponent implements OnInit{
 
   private toast = inject(ToastrService)
   private fb = inject(FormBuilder)
+  private prodService = inject(ProductService)
+  private router = inject(Router)
 
   formvalid : FormGroup = new FormGroup({});
 
@@ -23,6 +27,7 @@ export class CheckOutComponent implements OnInit{
 
   validate(){
     if(this.formvalid.valid){
+      
 
     this.toast.success("Checkout validated successfullly","",{
       progressBar:true,
@@ -30,6 +35,12 @@ export class CheckOutComponent implements OnInit{
       timeOut:1000,
       positionClass:'sucess'
     })
+    this.prodService.clearCart();
+    setTimeout(() => {
+      window.location.reload();
+    }, 1500);
+    
+    
 
   }
   else{

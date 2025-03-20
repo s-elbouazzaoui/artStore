@@ -16,7 +16,9 @@
 
 
 
-:root {
+
+
+/* :root {
     --bg-color: #ffffff;
     --text-color: #000000;
   }
@@ -51,4 +53,44 @@
 
 .dark-theme .cart mat-list{
     background-color: #d3d3d3 ; 
-}
+} */
+
+
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --card-bg: #ffffff;
+    --card-text: #000000;
+    --mat-title-color: #000000;
+    --list-bg: #ffffff;
+  }
+  
+  .dark-theme {
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --card-bg: #d3d3d3;
+    --card-text: #000000;
+    --mat-title-color: #000000;
+    --list-bg: #d3d3d3;
+  }
+
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+  }
+  
+  .product-card {
+    background-color: var(--card-bg) !important;
+    color: var(--card-text);
+  }
+  
+  .product-card .mat-card-title,
+  .product-card .mat-card-subtitle {
+    color: var(--mat-title-color);
+  }
+  
+  .cart mat-list {
+    background-color: var(--list-bg);
+  }
+  
